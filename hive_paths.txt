@@ -1,0 +1,2 @@
+HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR 
+HKLM\SYSTEM\CurrentControlSet\Enum\USB 
