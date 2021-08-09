@@ -12,27 +12,27 @@ if len(sys.argv) !=2:
     print("Please enter one file path as command line argument")
     exit(1)                                             #exits with an error code of 1 to indicate not being run correctly
 
-logFile = sys.argv[1]                                   #A list of command line arguments, and used to have user input data into program
+hiveFile = sys.argv[1]                                   #A list of command line arguments, and used to have user input data into program
 
 #Need to argparse this so that the user can input which file they want 
 
 
-reg = RegistryHive('/Users/martinkorman/Documents/TestEvidence/Registry/Vibranium-NTUSER.DAT')
+reg = RegistryHive(hiveFile)
 
 # Iterate over a registry hive recursively:
-for entry in reg.rec_subkeys(as_json=True):
+for entry in reg.recurse_subkeys(as_json=True):
     print(entry)
 
-# Iterate over a key and get all subkeys and their modification time:
-for sk in reg.get_key('Software').get_subkeys():
-    print(sk.name, convert_wintime(sk.header.last_modified).isoformat())
+## Iterate over a key and get all subkeys and their modification time:
+#for sk in reg.get_key('Software').get_subkeys():
+    #print(sk.name, convert_wintime(sk.header.last_modified).isoformat())
 
-# Get values from a specific registry key:
-reg.get_key('Software\Microsoft\Internet Explorer\BrowserEmulation').get_values(as_json=True)
+## Get values from a specific registry key:
+#reg.get_key('Software\Microsoft\Internet Explorer\BrowserEmulation').get_values(as_json=True)
 
-# Use plugins:
-from regipy.plugins.ntuser.ntuser_persistence import NTUserPersistencePlugin
-NTUserPersistencePlugin(reg, as_json=True).run()
+## Use plugins:
+#from regipy.plugins.ntuser.ntuser_persistence import NTUserPersistencePlugin
+#NTUserPersistencePlugin(reg, as_json=True).run()
 
-# Run all supported plugins on a registry hive:
-run_relevant_plugins(reg, as_json=True)
+## Run all supported plugins on a registry hive:
+#run_relevant_plugins(reg, as_json=True)
